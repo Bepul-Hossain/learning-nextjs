@@ -1,0 +1,24 @@
+import axios from 'axios';
+
+const Posts = ({ posts }) => {
+    return (
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+    );
+  };
+  
+  export async function getServerSideProps() {
+    const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+    const posts = res.data;
+  
+    return {
+      props: {
+        posts,
+      },
+    };
+  }
+  
+  export default Posts;
